@@ -1,0 +1,609 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+}
+
+.gjs-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    padding: 10px;
+}
+
+.gjs-cell {
+    min-height: 75px;
+    flex-grow: 1;
+    flex-basis: 100%;
+}
+
+#title-row {
+    padding: 1vh 0 1vh 0;
+    height: 15vh;
+}
+
+#time {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 30vw;
+}
+
+#time-text {
+    height: 13vh;
+    font-size: 6vh;
+    color: white;
+    text-align: center;
+}
+
+#horizontal-line-1 {
+    border: 0.5vh solid white;
+    padding: 0 0 0 0;
+    margin: 0.5vh 0 0.5vh 0;
+}
+
+#train-line-1-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-line-1 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 37vw;
+}
+
+#train-destination-1-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-destination-1 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 26vw;
+}
+
+#train-1-row-2 {
+    padding: 1vh 0 1vh 0;
+    height: 6vh;
+}
+
+#train-id-1-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-id-1 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 16vw;
+}
+
+#train-service-type-1-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-service-type-1 {
+    padding: 0 1vw 0 1vw;
+    max-width: 19vw;
+    min-height: 0;
+}
+
+#train-status-1-text {
+    height: 6vh;
+    font-size: 6vh;
+    color: white;
+    text-align: center;
+    margin: 0 0 1vh 0;
+    padding: 0 0 0 0;
+}
+
+#train-status-1 {
+    padding: 0 1vw 0 1vw;
+    max-width: 30vw;
+    min-height: 0;
+}
+
+#train-min-until-depart-1-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-min-until-depart-1 {
+    padding: 0 1vw 0 1vw;
+    max-width: 37vw;
+    min-height: 0;
+}
+
+#train-1-row-1 {
+    padding: 1vh 0 1vh 0;
+    height: 9vh;
+}
+
+#about-text {
+    height: 10vh;
+    font-size: 2.75vh;
+    color: white;
+    text-align: center;
+    margin: 1.5vh 0 1.5vh 0;
+}
+
+#about {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 70vw;
+}
+
+#horizontal-line-2 {
+    border: 0.5vh solid white;
+    padding: 0 0 0 0;
+    margin: 0.5vh 0 0.5vh 0;
+}
+
+#train-next-station-1-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-next-station-1 {
+    min-height: 0;
+    max-width: 37vw;
+}
+
+#train-id-2-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-id-2 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 16vw;
+}
+
+#train-service-type-2-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-service-type-2 {
+    padding: 0 1vw 0 1vw;
+    max-width: 19vw;
+    min-height: 0;
+}
+
+#train-status-2-text {
+    height: 6vh;
+    font-size: 6vh;
+    color: white;
+    text-align: center;
+    margin: 0 0 1vh 0;
+    padding: 0 0 0 0;
+}
+
+#train-status-2 {
+    padding: 0 1vw 0 1vw;
+    max-width: 30vw;
+    min-height: 0;
+}
+
+#train-min-until-depart-2-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-min-until-depart-2 {
+    padding: 0 1vw 0 1vw;
+    max-width: 37vw;
+    min-height: 0;
+}
+
+#train-2-row-1 {
+    padding: 1vh 0 1vh 0;
+    height: 9vh;
+}
+
+#train-line-2-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-line-2 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 37vw;
+}
+
+#train-destination-2-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-destination-2 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 26vw;
+}
+
+#train-next-station-2-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-next-station-2 {
+    min-height: 0;
+    max-width: 37vw;
+}
+
+#train-2-row-2 {
+    padding: 1vh 0 1vh 0;
+    height: 6vh;
+}
+
+#horizontal-line-3 {
+    border: 0.5vh solid white;
+    padding: 0 0 0 0;
+    margin: 0.5vh 0 0.5vh 0;
+}
+
+#train-id-3-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-id-3 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 16vw;
+}
+
+#train-service-type-3-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-service-type-3 {
+    padding: 0 1vw 0 1vw;
+    max-width: 19vw;
+    min-height: 0;
+}
+
+#train-status-3-text {
+    height: 6vh;
+    font-size: 6vh;
+    color: white;
+    text-align: center;
+    margin: 0 0 1vh 0;
+    padding: 0 0 0 0;
+
+}
+
+#train-status-3 {
+    padding: 0 1vw 0 1vw;
+    max-width: 30vw;
+    min-height: 0;
+}
+
+#train-min-until-depart-3-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-min-until-depart-3 {
+    padding: 0 1vw 0 1vw;
+    max-width: 37vw;
+    min-height: 0;
+}
+
+#train-3-row-1 {
+    padding: 1vh 0 1vh 0;
+    height: 9vh;
+}
+
+#train-line-3-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-line-3 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 37vw;
+}
+
+#train-destination-3-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-destination-3 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 26vw;
+}
+
+#train-next-station-3-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-next-station-3 {
+    min-height: 0;
+    max-width: 37vw;
+}
+
+#train-3-row-2 {
+    padding: 1vh 0 1vh 0;
+    height: 6vh;
+}
+
+#horizontal-line-4 {
+    border: 0.5vh solid white;
+    padding: 0 0 0 0;
+    margin: 0.5vh 0 0.5vh 0;
+}
+
+#train-id-4-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-id-4 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 16vw;
+}
+
+#train-service-type-4-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-service-type-4 {
+    padding: 0 1vw 0 1vw;
+    max-width: 19vw;
+    min-height: 0;
+}
+
+#train-status-4-text {
+    height: 6vh;
+    font-size: 6vh;
+    color: white;
+    text-align: center;
+    margin: 0 0 1vh 0;
+    padding: 0 0 0 0;
+}
+
+#train-status-4 {
+    padding: 0 1vw 0 1vw;
+    max-width: 30vw;
+    min-height: 0;
+}
+
+#train-min-until-depart-4-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-min-until-depart-4 {
+    padding: 0 1vw 0 1vw;
+    max-width: 37vw;
+    min-height: 0;
+}
+
+#train-4-row-1 {
+    padding: 1vh 0 1vh 0;
+    height: 9vh;
+}
+
+#train-line-4-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-line-4 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 37vw;
+}
+
+#train-destination-4-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-destination-4 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 26vw;
+}
+
+#train-next-station-4-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-next-station-4 {
+    min-height: 0;
+    max-width: 37vw;
+}
+
+#train-4-row-2 {
+    padding: 1vh 0 1vh 0;
+    height: 6vh;
+}
+
+#horizontal-line-5 {
+    border: 0.5vh solid white;
+    padding: 0 0 0 0;
+    margin: 0.5vh 0 0.5vh 0;
+}
+
+#train-id-5-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-id-5 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 16vw;
+}
+
+#train-service-type-5-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-service-type-5 {
+    padding: 0 1vw 0 1vw;
+    max-width: 19vw;
+    min-height: 0;
+}
+
+#train-status-5-text {
+    height: 6vh;
+    font-size: 6vh;
+    color: white;
+    text-align: center;
+    margin: 0 0 1vh 0;
+    padding: 0 0 0 0;
+}
+
+#train-status-5 {
+    padding: 0 1vw 0 1vw;
+    max-width: 30vw;
+    min-height: 0;
+}
+
+#train-min-until-depart-5-text {
+    height: 7vh;
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+}
+
+#train-min-until-depart-5 {
+    padding: 0 1vw 0 1vw;
+    max-width: 37vw;
+    min-height: 0;
+}
+
+#train-5-row-1 {
+    padding: 1vh 0 1vh 0;
+    height: 9vh;
+}
+
+#train-line-5-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-line-5 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 37vw;
+}
+
+#train-destination-5-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-destination-5 {
+    min-height: 0;
+    padding: 0 1vw 0 1vw;
+    max-width: 26vw;
+}
+
+#train-next-station-5-text {
+    height: 4vh;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#train-next-station-5 {
+    min-height: 0;
+    max-width: 37vw;
+}
+
+#train-5-row-2 {
+    padding: 1vh 0 1vh 0;
+    height: 6vh;
+}
+
+@media (max-width: 768px) {
+    .gjs-row {
+        flex-wrap: wrap;
+    }
+}
