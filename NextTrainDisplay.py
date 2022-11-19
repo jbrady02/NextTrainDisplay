@@ -80,7 +80,10 @@ def main():
                 service_type.append(str(data[index + 1]).replace("\"", ""))
         elif (item == "\"next_station\""):
             next_station.append(
-                str(data[index + 1]).replace("\"", "").replace("_", " "))
+                str(data[index + 1]).replace("\"", "").replace("_", " ")
+                .replace("Penn Medical", "Penn Medicine")
+                .replace("Delaware Valley College",
+                         "Delaware Valley University")) # Fix API name errors
 
     # Find the amount of minutes until the train departs
     for index in range(len(sched_timestamps)):
