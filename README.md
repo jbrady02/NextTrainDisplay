@@ -1,6 +1,6 @@
-![screenshot](https://user-images.githubusercontent.com/89806788/202290411-8501ad79-51fa-470b-b0e5-9c6c8465f013.png)
+![screenshot](https://user-images.githubusercontent.com/89806788/203143460-577a32fb-e3dd-4e72-aa70-e549318db4ac.png)
 # NextTrainDisplay
-A local web page that displays live information about the next Regional Rail trains to depart a given SEPTA station. For this, a looping Python program is used to take data from SEPTA’s API and output a HTML file containing information about the next trains to depart a given station.
+A local web page that displays live information about the next Regional Rail trains to depart a given SEPTA station. For this, a looping Python program is used to take data from [SEPTA's API](https://www3.septa.org/) and output a HTML file containing information about the next trains to depart a given station.
 # Description
 **NextTrainDisplay.py** - This gets data from SEPTA's API and outputs a HTML file. The code's loop frequency is determined by the minimum time until departure.\
 **next-train-display.html** - This is the display for the data. This file is opened by a web browser and is intended to be displayed fullscreen on a 16:9 or wider aspect ratio display.\
@@ -30,4 +30,6 @@ Make sure to save settings.txt. Then, run NextTrainDisplay.py and open **next-tr
 | Norristown Transportation Center | Norristown TC |
 | Holmesburg Junction | Holmesburg Jct |
 | Chester Transportation Center | Chester TC |
-
+# Special Thanks
+[GrapeJS](https://grapesjs.com/) for its HTML and CSS creating tool.\
+[SEPTA](https://www3.septa.org/) for making the API that this project uses.
