@@ -31,5 +31,5 @@ Make sure to save settings.txt. Then, run NextTrainDisplay.py and open **next-tr
 | Holmesburg Junction | Holmesburg Jct |
 | Chester Transportation Center | Chester TC |
 # Special Thanks
-[GrapeJS](https://grapesjs.com/) for its HTML and CSS creating tool.\
+[GrapeJS](https://grapesjs.com/) for its HTML and CSS generating tool.\
 [SEPTA](https://www3.septa.org/) for making the API that this project uses.
