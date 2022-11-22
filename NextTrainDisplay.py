@@ -23,29 +23,30 @@ def main():
 
     # Get the scheduled times and format the data
     data = str(raw_data)
-    sched_time = []
-    sched_timestamps = []
+    depart_time = []
+    depart_timestamps = []
     current_time = time.time()
     for index in range(len(data)):
-        if (data[index:index+10] == "sched_time"):
-            sched_time_output = data[index+13:index+29]
-            sched_timestamp = time.mktime(datetime.datetime.strptime
-                                          (sched_time_output,
+        if (data[index:index+11] == "depart_time"):
+            depart_time_output = data[index+14:index+30]
+            depart_timestamp = time.mktime(datetime.datetime.strptime
+                                          (depart_time_output,
                                            "%Y-%m-%d %H:%M").timetuple())
-            sched_timestamps.append(sched_timestamp)
-            sched_time_output = data[index+24:index+29]
+            depart_timestamps.append(depart_timestamp)
+            depart_time_output = data[index+24:index+29]
             # Convert from 24 hour clock to 12 hour clock
-            if (int(sched_time_output[0:2]) > 12):
-                sched_time_output = (str(int(sched_time_output[0:2]) - 12) +
-                                     sched_time_output[2:5] + " pm")
-            elif (int(sched_time_output[0:2]) < 12 and
-                  int(sched_time_output[0:2]) > 0):
-                sched_time_output = sched_time_output + " am"
-            elif (int(sched_time_output[0:2]) == 12):
-                sched_time_output = sched_time_output + " pm"
+            if (int(depart_time_output[0:2]) > 12):
+                depart_time_output = (str(int(depart_time_output[0:2]) - 12) +
+                                     depart_time_output[2:5] + " pm")
+            elif (int(depart_time_output[0:2]) < 12 and
+                  int(depart_time_output[0:2]) > 0):
+                depart_time_output = depart_time_output + " am"
+            elif (int(depart_time_output[0:2]) == 12):
+                depart_time_output = depart_time_output + " pm"
             else:
-                sched_time_output = str("12" + sched_time_output[2:5] + " am")
-            sched_time.append(sched_time_output)
+                depart_time_output = str(
+                    "12" + depart_time_output[2:5] + " am")
+            depart_time.append(depart_time_output)
 
     # Format the data
     data = (data.replace(" ", "_").replace("\\", "").replace(",", " ")
@@ -86,7 +87,7 @@ def main():
                          "Delaware Valley University")) # Fix API name errors
 
     # Find the amount of minutes until the train departs
-    for index in range(len(sched_timestamps)):
+    for index in range(len(depart_timestamps)):
         # Create an int for the late time
         late = "0"
         if (status[index] == "On Time"):
@@ -99,7 +100,7 @@ def main():
             status[index] = status[index] + " late"
         late = int(late)
         min_until_depart.append(
-            int((sched_timestamps[index] - current_time) / 60) + late)
+            int((depart_timestamps[index] - current_time) / 60) + late)
 
     # Sort trains by time until departure.
     train_order = []
@@ -113,7 +114,7 @@ def main():
         minimum = 1000
         min_index = -1
         for index, item in enumerate(departure_sorter):
-            if (departure_sorter[index] < minimum):
+            if (item < minimum):
                 minimum = departure_sorter[index]
                 min_index = index
         train_order.append(min_index)
@@ -136,15 +137,14 @@ def main():
                  'elevator outages, and more. The data displayed here is ' +
                  'Copyright Southeastern Pennsylvania Transportation ' +
                  'Authority. All Rights Reserved.</div> </div> </div>')
-    for index, item in enumerate(train_order):
-        position = train_order[index]
+    for index, position in enumerate(train_order):
         # Set train_status
         train_status = ""
         if (status[position] != "999 min late"):
             if (next_station[position] == "null"):
                 train_status = "Not Tracked"
             else:
-                train_status = status[index]
+                train_status = status[position]
         else:
             train_status = "Suspended"
         # Set border_color
