@@ -1,4 +1,4 @@
-![screenshot](https://user-images.githubusercontent.com/89806788/203143460-577a32fb-e3dd-4e72-aa70-e549318db4ac.png)
+![screenshot](https://user-images.githubusercontent.com/89806788/203426527-15a0f25c-5796-4aa4-9567-70ccff27b960.png)
 # NextTrainDisplay
 A local web page that displays live information about the next Regional Rail trains to depart a given SEPTA station. For this, a looping Python program is used to take data from [SEPTA's API](https://www3.septa.org/) and output a HTML file containing information about the next trains to depart a given station.
 # Description
