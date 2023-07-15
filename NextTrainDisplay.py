@@ -4,7 +4,7 @@ from tkinter import ttk
 import urllib.request
 import time
 import datetime
-"""Make a visual display that contains live information about the next trains 
+"""Make a visual display that contains live information about the next trains
 to depart a given SEPTA Regional Rail station using SEPTA's API.
 """
 
@@ -73,7 +73,7 @@ def main():
 
     # Find the amount of minutes until the train departs
     for index in range(len(depart_timestamps)):
-        # Create an int for the late time
+        # Create a status message and an integer for the late time
         late = "0"
         if (status[index] == "On Time"):
             pass
@@ -81,7 +81,7 @@ def main():
             for second_index in range(0, 3):
                 if (status[index][second_index] in ["0", "1", "2", "3", "4",
                                                     "5", "6", "7", "8", "9"]):
-                    late = late + status[index][second_index]
+                    late += status[index][second_index]
             status[index] = status[index] + " late"
         late = int(late)
         if (str(next_station[index]) == ""):
@@ -160,9 +160,8 @@ def get_data_from_api():
     url = ("https://www3.septa.org/api/Arrivals/index.php?station=" + station
            + "&direction=" + direction)
     url = url.replace(" ", "%20")
-    site = urllib.request.urlopen(url)
-    raw_data = site.read()
-    site.close()
+    with urllib.request.urlopen(url) as site:
+        raw_data = str(site.read())
     return str(raw_data)
 
 
@@ -209,12 +208,11 @@ if __name__ == "__main__":
     """Get the settings and create the display
     """
     # Get the settings
-    settings = open("settings.txt", "r")
-    fullscreen = settings.readline().strip("\n")
-    maximum_results = int(settings.readline().strip("\n"))
-    station = settings.readline().strip("\n")
-    direction = settings.readline().strip("\n")
-    settings.close()
+    with open("settings.txt", "r") as settings:
+        fullscreen = settings.readline().strip("\n")
+        maximum_results = int(settings.readline().strip("\n"))
+        station = settings.readline().strip("\n")
+        direction = settings.readline().strip("\n")
 
     # Create the display
     root = Tk()
@@ -274,8 +272,13 @@ if __name__ == "__main__":
 
     # Make copyright disclaimer
     copyright.append(Label(root))
-    copyright[0].config(bg=BG_COLOR, fg=FG_COLOR, font=("Arial", int(root.winfo_screenwidth() / 130)),
-                        text="This is an unofficial real-time information display that uses SEPTA's API. Visit septa.org for more information. The displayed data is Copyright Southeastern Pennsylvania Transportation Authority. All Rights Reserved.")
+    copyright[0].config(bg=BG_COLOR, fg=FG_COLOR,
+                        font=("Arial", int(root.winfo_screenwidth() / 130)),
+                        text="This is an unofficial real-time information "
+                        "display that uses SEPTA's API. Visit septa.org for "
+                        "more information. The displayed data is Copyright "
+                        "Southeastern Pennsylvania Transportation Authority. "
+                        "All Rights Reserved.")
     copyright[0].grid(row=(maximum_results - 1) *
                       3 + 3, column=0, columnspan=4)
     root.grid_rowconfigure((maximum_results - 1) * 3 + 3, weight=1)
