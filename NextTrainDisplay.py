@@ -9,9 +9,59 @@ to depart a given SEPTA Regional Rail station using SEPTA's API.
 """
 
 
-def main():
-    """Make lists with the data, update the window with the data, then loop.
+def get_data_from_api():
+    """Get data from SEPTA's API and format the data.
+    Return the API data.
     """
+    url = ("https://www3.septa.org/api/Arrivals/index.php?station=" + station
+           + "&direction=" + direction)
+    url = url.replace(" ", "%20")
+    with urllib.request.urlopen(url) as site:
+        raw_data = str(site.read())
+    return str(raw_data)
+
+
+def status_color(status):
+    """Determine the text color of the status message.
+    Return the hexadecimal value for the color.
+    """
+    if status == "On Time":
+        return "#00FF00"  # Lime
+    elif status == "Suspended":
+        return "#FF6347"  # Tomato
+    elif status == "Not Tracked":
+        return "#00FFFF"  # Cyan
+    elif int(status.replace(" min late", "")) < 3:
+        return "#00FF00"  # Lime
+    elif int(status.replace(" min late", "")) < 6:
+        return "#FFFF00"  # Yellow
+    elif int(status.replace(" min late", "")) < 9:
+        return "#FFA500"  # Orange
+    else:
+        return "#FF6347"  # Tomato
+
+
+def time_until_next_update(min_until_depart_int):
+    """Determine amount of time until the data gets updated,
+    which is lower when a train is close to depart the station.
+    Return the time until the data gets updated in milliseconds.
+    """
+    if len(min_until_depart_int) > 0:
+        next_departure_time = min(min_until_depart_int)
+        if next_departure_time > 20:
+            return 60000
+        elif next_departure_time > 10:
+            return 45000
+        elif next_departure_time > 5:
+            return 30000
+        elif next_departure_time > 2:
+            return 15000
+        else:
+            return 10000
+
+
+def main():
+    """Make lists with the data, update the window with the data, then loop."""
     data = get_data_from_api()
 
     # Get the scheduled times and format the data
@@ -41,27 +91,27 @@ def main():
     min_until_depart_int = []
     min_until_depart = []
     for index, item in enumerate(data):
-        if (item == "\"train_id\""):
+        if item == "\"train_id\"":
             train_id.append(
                 str(data[index + 1]).replace("\"", "").replace(".", ""))
-        elif (item == "\"destination\""):
+        elif item == "\"destination\"":
             destination.append(
                 "To " + str(data[index + 1]).replace("\"", "")
                 .replace("_", " "))
-        elif (item == "\"line\""):
+        elif item == "\"line\"":
             line.append(
                 str(data[index + 1]).replace("\"", "").replace("_", " ")
                 + " Line")
-        elif (item == "\"status\""):
+        elif item == "\"status\"":
             status.append(
                 str(data[index + 1]).replace("\"", "").replace("_", " "))
-        elif (item == "\"service_type\""):
-            if ((str(data[index + 1])[1:4] == "EXP")):
+        elif item == "\"service_type\"":
+            if str(data[index + 1])[1:4] == "EXP":
                 service_type.append("EXPRESS")
             else:
                 service_type.append(str(data[index + 1]).replace("\"", ""))
-        elif (item == "\"next_station\""):
-            if (str(data[index + 1]) == "null"):
+        elif item == "\"next_station\"":
+            if str(data[index + 1]) == "null":
                 next_station.append("")
             else:
                 next_station.append(
@@ -75,20 +125,20 @@ def main():
     for index in range(len(depart_timestamps)):
         # Create a status message and an integer for the late time
         late = "0"
-        if (status[index] == "On Time"):
+        if status[index] == "On Time":
             pass
         else:
             for second_index in range(0, 3):
-                if (status[index][second_index] in ["0", "1", "2", "3", "4",
-                                                    "5", "6", "7", "8", "9"]):
+                if status[index][second_index] in ["0", "1", "2", "3", "4",
+                                                   "5", "6", "7", "8", "9"]:
                     late += status[index][second_index]
             status[index] = status[index] + " late"
         late = int(late)
-        if (str(next_station[index]) == ""):
+        if str(next_station[index]) == "":
             status[index] = "Not Tracked"
 
         # Make the minutes until the train departs message
-        if (status[index] != "Suspended"):
+        if status[index] != "Suspended":
             if (int((depart_timestamps[index] - current_time) / 60)
                     + late != 0):
                 min_until_depart.append(
@@ -105,19 +155,19 @@ def main():
             min_until_depart.append("")
             min_until_depart_int.append(999)
 
-    # Sort trains by time until departure.
+    # Sort trains by time until departure
     train_order = []
     departure_sorter = []
     for index in range(0, len(min_until_depart_int)):
         departure_sorter.append(min_until_depart_int[index])
     number_to_sort = len(train_id)
-    if (number_to_sort > maximum_results):
+    if number_to_sort > maximum_results:
         number_to_sort = maximum_results
     for index in range(0, number_to_sort):
         minimum = 2000
         min_index = -1
         for index, item in enumerate(departure_sorter):
-            if (item < minimum):
+            if item < minimum:
                 minimum = departure_sorter[index]
                 min_index = index
         train_order.append(min_index)
@@ -139,7 +189,7 @@ def main():
             text=next_station[train_order[index]])
 
     # Remove data from rows that should be empty
-    if (len(train_order) < maximum_results):
+    if len(train_order) < maximum_results:
         for index in range(len(train_order), maximum_results):
             display_train_id[index].config(text="")
             display_service_type[index].config(text="")
@@ -153,60 +203,8 @@ def main():
     root.after(update_frequency, main)
 
 
-def get_data_from_api():
-    """Get data from SEPTA's API and format the data
-    Return the API data
-    """
-    url = ("https://www3.septa.org/api/Arrivals/index.php?station=" + station
-           + "&direction=" + direction)
-    url = url.replace(" ", "%20")
-    with urllib.request.urlopen(url) as site:
-        raw_data = str(site.read())
-    return str(raw_data)
-
-
-def status_color(status):
-    """Determine the text color of the status message
-    Return the hexadecimal value for the color
-    """
-    if (status == "On Time"):
-        return "#00FF00"  # Lime
-    elif (status == "Suspended"):
-        return "#FF6347"  # Tomato
-    elif (status == "Not Tracked"):
-        return "#00FFFF"  # Cyan
-    elif (int(status.replace(" min late", "")) < 3):
-        return "#00FF00"  # Lime
-    elif (int(status.replace(" min late", "")) < 6):
-        return "#FFFF00"  # Yellow
-    elif (int(status.replace(" min late", "")) < 9):
-        return "#FFA500"  # Orange
-    else:
-        return "#FF6347"  # Tomato
-
-
-def time_until_next_update(min_until_depart_int):
-    """Determine amount of time until the data gets updated,
-    which is lower when a train is close to depart the station
-    Return the time until the data gets updated in milliseconds
-    """
-    if (len(min_until_depart_int) > 0):
-        next_departure_time = min(min_until_depart_int)
-        if (next_departure_time > 20):
-            return 60000
-        elif (next_departure_time > 10):
-            return 45000
-        elif (next_departure_time > 5):
-            return 30000
-        elif (next_departure_time > 2):
-            return 15000
-        else:
-            return 10000
-
-
 if __name__ == "__main__":
-    """Get the settings and create the display
-    """
+    """Get the settings and create the display."""
     # Get the settings
     with open("settings.txt", "r") as settings:
         fullscreen = settings.readline().strip("\n")
@@ -219,7 +217,7 @@ if __name__ == "__main__":
     BG_COLOR = "#000000"  # Black
     FG_COLOR = "#FFFFFF"  # White
     root.configure(bg=BG_COLOR)
-    if (fullscreen[0].upper() == "T"):
+    if fullscreen[0].upper() == "T":
         fullscreen = True
     else:
         fullscreen = False
