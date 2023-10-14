@@ -1,12 +1,13 @@
 #!/usr/bin/python3
+"""Make a visual display that contains live information about the next trains
+to depart a given SEPTA Regional Rail station using SEPTA's API.
+"""
+
 from tkinter import *
 from tkinter import ttk
 import urllib.request
 import time
 import datetime
-"""Make a visual display that contains live information about the next trains
-to depart a given SEPTA Regional Rail station using SEPTA's API.
-"""
 
 
 def get_data_from_api():
