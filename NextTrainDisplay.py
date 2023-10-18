@@ -10,10 +10,8 @@ import time
 import datetime
 
 
-def get_data_from_api():
-    """Get data from SEPTA's API and format the data.
-    Return the API data.
-    """
+def get_data_from_api() -> str:
+    """Get data from SEPTA's API and format the data. Return the API data."""
     url = ("https://www3.septa.org/api/Arrivals/index.php?station=" + station
            + "&direction=" + direction)
     url = url.replace(" ", "%20")
@@ -22,7 +20,7 @@ def get_data_from_api():
     return str(raw_data)
 
 
-def status_color(status):
+def status_color(status) -> str:
     """Determine the text color of the status message.
     Return the hexadecimal value for the color.
     """
@@ -42,8 +40,10 @@ def status_color(status):
         return "#FF6347"  # Tomato
 
 
-def time_until_next_update(min_until_depart_int):
-    """Determine amount of time until the data gets updated,
+def time_until_next_update(min_until_depart_int) -> int:
+    """Get time until next data update.
+
+    Determine amount of time until the data gets updated,
     which is lower when a train is close to depart the station.
     Return the time until the data gets updated in milliseconds.
     """
